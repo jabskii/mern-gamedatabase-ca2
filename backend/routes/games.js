@@ -27,7 +27,6 @@ router.route('/:id').get((req, res) => {
   const gameId = req.params.id;
 
   Game.findById(gameId)
-    .populate('igdb_id')
     .then(result => {
       if (!result) {
         return res.status(404).json({
@@ -43,7 +42,7 @@ router.route('/:id').get((req, res) => {
         });
       }
       return res.status(500).json({
-        message: 'Error retrieving Game with id ' + gameId
+        message: 'Error retrieving game with id ' + gameId
       });
     });
 });

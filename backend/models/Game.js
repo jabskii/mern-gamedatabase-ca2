@@ -14,25 +14,25 @@ const GameSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  developer: [
+  developer_id: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Developer'
     }
   ],
-  publisher: [
+  publisher_id: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Publisher'
     }
   ],
-  genre: [
+  genre_id: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Genre'
     }
   ],
-  platform: [
+  platform_id: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Platform'
@@ -41,7 +41,7 @@ const GameSchema = new mongoose.Schema({
   release_date: {
     type: String
   },
-  game_modes: [
+  game_modes_id: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'game_modes'
