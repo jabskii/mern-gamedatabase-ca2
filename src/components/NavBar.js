@@ -31,19 +31,19 @@ export default class NavBar extends Component {
             <Nav.Link as={Link} to="/">
               Games
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/developers">
               Developers
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/publishers">
               Publishers
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/genres">
               Genres
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/platforms">
               Platforms
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/game_modes">
               Game Modes
             </Nav.Link>
           </Nav>

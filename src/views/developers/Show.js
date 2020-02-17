@@ -1,31 +1,47 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Badge from 'react-bootstrap/Badge';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import { Alert, Row, Col, ListGroupItem, ListGroup } from 'react-bootstrap';
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 
-const Developer = props => {
-  return <ListGroupItem>{props.developer}</ListGroupItem>;
-};
-const Publisher = props => {
-  return <ListGroupItem>{props.publisher}</ListGroupItem>;
-};
-const Platform = props => {
-  return <ListGroupItem>{props.platform}</ListGroupItem>;
-};
-const Game_mode = props => {
-  return <ListGroupItem>{props.game_mode}</ListGroupItem>;
-};
-const Genre = props => <Badge variant="light">{props.genre}</Badge>;
+//Functional Components
+const Developer = props => (
+  <>
+    <Row>
+      <Col sm={6}>
+        <Card.Body>
+          {/* <Card.Img src={defaultDeveloper} roundedCircle /> */}
+        </Card.Body>
+      </Col>
+      <Col sm={6}>
+        <Card.Body>
+          <Card.Title>Games</Card.Title>
+          <ListGroup>
+            {props.developer.games.map(game => {
+              return <ListGroupItem>{game.title}</ListGroupItem>;
+            })}
+          </ListGroup>
+        </Card.Body>
+        <Card.Body>
+          <Card.Title>Developer</Card.Title>
+          <ListGroup>
+            <ListGroupItem>{props.developer.igdb_id}</ListGroupItem>
+            <ListGroupItem>{props.developer.name}</ListGroupItem>
+          </ListGroup>
+        </Card.Body>
+      </Col>
+    </Row>
+  </>
+);
 
-export default class GameShow extends Component {
+export default class DeveloperShow extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      game: {},
+      developer: {},
       show: false,
       loading: true
     };
@@ -35,11 +51,11 @@ export default class GameShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:5000/games/${id}`)
+      .get(`http://localhost:4000/developers/${id}`)
       .then(response => {
         console.log(response);
         this.setState({
-          game: response.data,
+          developer: response.data,
           loading: false
         });
       })
@@ -47,61 +63,32 @@ export default class GameShow extends Component {
         console.log(error);
       });
   }
-
   delete() {
     const { id } = this.props.match.params;
 
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
-      'jwtToken'
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "jwtToken"
     );
     axios
-      .delete(`http://localhost:5000/games/${id}`)
+      .delete(`http://localhost:4000/developers/${id}`)
       .then(response => {
-        console.log(response);
-        window.location = '/';
+        window.location = "/developers";
       })
       .catch(error => {
         console.log(error);
       });
+    // window.location
   }
 
-  developerList() {
-    return this.state.game.developer_id.map((currentDeveloper, index) => {
-      return <Developer developer={currentDeveloper.name} key={index} />;
-    });
-  }
-
-  publisherList() {
-    return this.state.game.publisher_id.map((currentPublisher, index) => {
-      return <Publisher publisher={currentPublisher.name} key={index} />;
-    });
-  }
-
-  platformList() {
-    return this.state.game.platform_id.map((currentPlatform, index) => {
-      return <Platform platform={currentPlatform.name} key={index} />;
-    });
-  }
-
-  game_modeList() {
-    return this.state.game.game_mode_id.map((currentGame_mode, index) => {
-      return <Game_mode game_mode={currentGame_mode.name} key={index} />;
-    });
-  }
-
-  genreList() {
-    return this.state.game.genre_id.map((currentGenre, index) => {
-      return <Genre genre={currentGenre.name} key={index} />;
-    });
-  }
-
+  // DELETE confirmation before hitting endpoint. Show and hide by setting state
   AlertDismissible() {
     return (
       <>
         <Alert show={this.state.show} variant="secondary">
           <Alert.Heading>Confirm</Alert.Heading>
           <p>
-            Are you sure you want to delete this game - {this.state.game.title}
+            Are you sure you want to delete this developer -{" "}
+            {this.state.developer.name}
           </p>
           <hr />
           <div className="d-flex justify-content-end">
@@ -121,60 +108,43 @@ export default class GameShow extends Component {
   }
 
   render() {
-    const { game, loading, show } = this.state;
+    const { developer, loading, show } = this.state;
 
     if (loading) {
       return (
-        <div>
+        <>
           <h3>Loading...</h3>
-        </div>
+        </>
       );
     }
 
     return (
-      <div>
+      <>
         <br />
         <Card>
           {this.AlertDismissible()}
-          <Card.Header as="h5">
-            {game.title} <span className="float-right">{this.genreList()}</span>
-          </Card.Header>
+          <Card.Header as="h5">{this.state.developer.name}</Card.Header>
 
-          <Row>
-            <Col sm={6}>
-              <Card.Body>
-                {/* <Card.Img src={placeholder} roundedCircle /> */}
-              </Card.Body>
-            </Col>
-            <Col sm={6}>
-              <Card.Body>
-                <Card.Title>Synopsis</Card.Title>
-                <Card.Text>{this.state.game.description}</Card.Text>
-              </Card.Body>
-              <Card.Body>
-                <Card.Title>Developer(s)</Card.Title>
-                <ListGroup>{this.developerList()}</ListGroup>
-              </Card.Body>
-            </Col>
-          </Row>
+          <Developer developer={this.state.developer} />
           <Card.Footer>
-            <span className="float-left mr-2">
+            <span className="float-left">
               {
-                <Button as={Link} to="/" variant="primary">
-                  View all games
+                <Button as={Link} to="/developers" variant="primary">
+                  View all developers
                 </Button>
               }
             </span>
+            {/* conditional component rendering, show buttons for crud abilities if signed in */}
             {localStorage.jwtToken != null ? (
               <>
                 <span className="float-left">
                   {
                     <Button
                       as={Link}
-                      to={`/games/update/${this.state.game._id}`}
+                      to={`/developers/update/${this.state.developer._id}`}
                       variant="primary"
                     >
-                      Update game
+                      Update Developer
                     </Button>
                   }
                 </span>
@@ -197,7 +167,7 @@ export default class GameShow extends Component {
             )}
           </Card.Footer>
         </Card>
-      </div>
+      </>
     );
   }
 }

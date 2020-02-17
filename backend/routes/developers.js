@@ -19,6 +19,7 @@ const getToken = headers => {
 
 router.route('/').get((req, res) => {
   Developer.find()
+    .populate('games')
     .then(developers => res.json(developers))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -27,6 +28,7 @@ router.route('/:id').get((req, res) => {
   const developerId = req.params.id;
 
   Developer.findById(developerId)
+    .populate('games')
     .then(result => {
       if (!result) {
         return res.status(404).json({

@@ -57,7 +57,7 @@ export default class GameModeCreate extends Component {
   render() {
     return (
       <div>
-        <h3>Add new Platform</h3>
+        <h3>Add new Game Mode</h3>
         <Form onSubmit={this.onSubmit} encType="multipart/form-data">
           <Form.Group as={Row} controlId="formHorizontalName">
             <Form.Label column sm={2}>
@@ -78,7 +78,7 @@ export default class GameModeCreate extends Component {
           <br />
           <Form.Group as={Row}>
             <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Add Platform</Button>
+              <Button type="submit">Add Game Mode</Button>
             </Col>
           </Form.Group>
         </Form>

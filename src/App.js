@@ -3,10 +3,36 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+
 import GameIndex from './views/games/Index';
 import GameShow from './views/games/Show';
 import GameCreate from './views/games/Create';
 import GameEdit from './views/games/Edit';
+
+import DeveloperIndex from './views/developers/Index';
+import DeveloperShow from './views/developers/Show';
+import DeveloperCreate from './views/developers/Create';
+import DeveloperEdit from './views/developers/Edit';
+
+import PublisherIndex from './views/publishers/Index';
+import PublisherShow from './views/publishers/Show';
+import PublisherCreate from './views/publishers/Create';
+import PublisherEdit from './views/publishers/Edit';
+
+import GenreIndex from './views/genres/Index';
+import GenreShow from './views/genres/Show';
+import GenreCreate from './views/genres/Create';
+import GenreEdit from './views/genres/Edit';
+
+import PlatformIndex from './views/platforms/Index';
+import PlatformShow from './views/platforms/Show';
+import PlatformCreate from './views/platforms/Create';
+import PlatformEdit from './views/platforms/Edit';
+
+import GameModeIndex from './views/game_modes/Index';
+import GameModeShow from './views/game_modes/Show';
+import GameModeCreate from './views/game_modes/Create';
+import GameModeEdit from './views/game_modes/Edit';
 
 import NavBar from './components/NavBar';
 import Register from './views/users/Register';
@@ -47,6 +73,46 @@ class App extends React.Component {
                 </Route>
                 <Route path="/games/:id" exact component={GameShow} />
                 <Route path="/games/update/:id" exact component={GameEdit} />
+
+                {/* Developer Routes connected to Compnents */}
+                <Route path="/" exact component={DeveloperIndex} />
+                <Route exact path="/developers/create">
+                  {loggedIn ? <DeveloperCreate /> : <Redirect to="/" />}
+                </Route>
+                <Route path="/developers/:id" exact component={DeveloperShow} />
+                <Route path="/developers/update/:id" exact component={DeveloperEdit} />
+
+                {/* Publisher Routes connected to Compnents */}
+                <Route path="/" exact component={PublisherIndex} />
+                <Route exact path="/publishers/create">
+                  {loggedIn ? <PublisherCreate /> : <Redirect to="/" />}
+                </Route>
+                <Route path="/publishers/:id" exact component={PublisherShow} />
+                <Route path="/publishers/update/:id" exact component={PublisherEdit} />
+
+                {/* Genre Routes connected to Compnents */}
+                <Route path="/" exact component={GenreIndex} />
+                <Route exact path="/genres/create">
+                  {loggedIn ? <GenreCreate /> : <Redirect to="/" />}
+                </Route>
+                <Route path="/genres/:id" exact component={GenreShow} />
+                <Route path="/genres/update/:id" exact component={GenreEdit} />
+
+                {/* Platform Routes connected to Compnents */}
+                <Route path="/" exact component={PlatformIndex} />
+                <Route exact path="/platforms/create">
+                  {loggedIn ? <PlatformCreate /> : <Redirect to="/" />}
+                </Route>
+                <Route path="/platforms/:id" exact component={PlatformShow} />
+                <Route path="/platforms/update/:id" exact component={PlatformEdit} />
+
+                {/* Game Mode Routes connected to Compnents */}
+                <Route path="/" exact component={GameModeIndex} />
+                <Route exact path="/game_modes/create">
+                  {loggedIn ? <GameModeCreate /> : <Redirect to="/" />}
+                </Route>
+                <Route path="/game_modes/:id" exact component={GameModeShow} />
+                <Route path="/game_modes/update/:id" exact component={GameModeEdit} />
 
                 {/* User Routes connected to components */}
                 <Route path="/register" exact component={Register} />

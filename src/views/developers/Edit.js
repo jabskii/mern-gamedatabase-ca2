@@ -16,6 +16,8 @@ export default class DeveloperCreate extends Component {
   }
 
   componentDidMount() {
+    const { id } = this.props.match.params;
+
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'jwtToken'
     );
