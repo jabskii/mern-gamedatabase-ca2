@@ -31,9 +31,21 @@ export default class NavBar extends Component {
             <Nav.Link as={Link} to="/">
               Games
             </Nav.Link>
-            {/* <Nav.Link as={Link} to="/genres">
-              Top Games
-            </Nav.Link> */}
+            <Nav.Link as={Link} to="/">
+              Developers
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Publishers
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Genres
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Platforms
+            </Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Game Modes
+            </Nav.Link>
           </Nav>
           <Nav>
             {loggedIn ? (
