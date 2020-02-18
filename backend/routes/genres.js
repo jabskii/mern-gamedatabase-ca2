@@ -1,12 +1,10 @@
-const router = require('express').Router();
-const passport = require('passport');
-const settings = require('../config/passport.js')(passport);
-
-let Genre = require('../models/Genre');
+const router = require("express").Router();
+const passport = require("passport");
+const settings = require("../config/passport")(passport);
 
 const getToken = headers => {
   if (headers && headers.authorization) {
-    var parted = headers.authorization.split(' ');
+    var parted = headers.authorization.split(" ");
     if (parted.length === 2) {
       return parted[1];
     } else {
@@ -17,38 +15,44 @@ const getToken = headers => {
   }
 };
 
-router.route('/').get((req, res) => {
+let Genre = require("../models/Genre");
+
+router.route("/").get((req, res) => {
   Genre.find()
-    .then(genre => res.json(genre))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .populate("games")
+    .then(genres => res.json(genres))
+    .catch(err => res.status(400).json("Error: " + err));
+
+  // res.json(genres);
 });
 
-router.route('/:id').get((req, res) => {
+router.route("/:id").get((req, res) => {
   const genreId = req.params.id;
 
   Genre.findById(genreId)
+    .populate("games")
     .then(result => {
       if (!result) {
         return res.status(404).json({
-          message: 'Genre not found with id ' + genreId
+          message: "genre not found with id " + genreId
         });
       }
       res.json(result);
     })
     .catch(err => {
-      if (err.kind === 'ObjectId') {
+      if (err.kind === "ObjectId") {
         return res.status(404).json({
-          message: 'Genre not found with id ' + genreId
+          message: "genre not found with id " + genreId
         });
       }
       return res.status(500).json({
-        message: 'Error retrieving genre with id ' + genreId
+        message: "Error retrieving genre with id " + genreId
       });
     });
 });
 
-router.route('/').post(
-  passport.authenticate('jwt', {
+router.route("/").post(
+  passport.authenticate("jwt", {
     session: false
   }),
   (req, res) => {
@@ -56,9 +60,9 @@ router.route('/').post(
     const genre = req.body;
     //validate genre
     if (token) {
-      if (!genre.title) {
+      if (!genre.name) {
         return res.status(400).json({
-          message: 'Genre title can not be empty'
+          message: "genre name can not be empty"
         });
       }
 
@@ -69,18 +73,18 @@ router.route('/').post(
         .then(data => {
           res.json(data);
         })
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json("Error: " + err));
     } else {
       return res.status(403).json({
         success: false,
-        message: 'Unauthorized.'
+        message: "Unauthorized."
       });
     }
   }
 );
 
-router.route('/:id').put(
-  passport.authenticate('jwt', {
+router.route("/:id").put(
+  passport.authenticate("jwt", {
     session: false
   }),
   (req, res) => {
@@ -88,45 +92,45 @@ router.route('/:id').put(
     const genreId = req.params.id;
     const newGenre = req.body;
     if (token) {
-      if (!newGenre.title) {
+      if (!newGenre.name) {
         return res.status(400).json({
-          message: 'Genre title can not be empty'
+          message: "Genre name can not be empty"
         });
       }
 
-      // Find genre and update it with the request body
+      // Find Genre and update it with the request body
       Genre.findByIdAndUpdate(genreId, newGenre, {
         new: true
       })
         .then(genre => {
           if (!genre) {
             return res.status(404).json({
-              message: 'Genre not found with id ' + genreId
+              message: "genre not found with id " + genreId
             });
           }
           res.json(genre);
         })
         .catch(err => {
-          if (err.kind === 'ObjectId') {
+          if (err.kind === "ObjectId") {
             return res.status(404).json({
-              message: 'Genre not found with id ' + genreId
+              message: "genre not found with id " + genreId
             });
           }
           return res.status(500).json({
-            message: 'Error updating genre with id ' + genreId
+            message: "Error updating genre with id " + genreId
           });
         });
     } else {
       return res.status(403).json({
         success: false,
-        message: 'Unauthorized'
+        message: "Unauthorized"
       });
     }
   }
 );
 
-router.route('/:id').delete(
-  passport.authenticate('jwt', {
+router.route("/:id").delete(
+  passport.authenticate("jwt", {
     session: false
   }),
   (req, res) => {
@@ -137,27 +141,27 @@ router.route('/:id').delete(
         .then(genre => {
           if (!genre) {
             return res.status(404).json({
-              message: 'Genre not found with id ' + genreId
+              message: "genre not found with id " + genreId
             });
           }
           res.json({
-            message: 'Genre deleted successfully!'
+            message: "genre deleted successfully!"
           });
         })
         .catch(err => {
-          if (err.kind === 'ObjectId' || err.name === 'NotFound') {
+          if (err.kind === "ObjectId" || err.name === "NotFound") {
             return res.status(404).json({
-              message: 'Genre not found with id ' + genreId
+              message: "genre not found with id " + genreId
             });
           }
           return res.status(500).send({
-            message: 'Could not delete genre with id ' + genreId
+            message: "Could not delete genre with id " + genreId
           });
         });
     } else {
       return res.status(403).json({
         success: false,
-        messsage: 'Unuthorized'
+        messsage: "Unuthorized"
       });
     }
   }

@@ -21,11 +21,11 @@ const Platform = props => (
     <Card.Body>
       <Card.Title>{props.platform.name}</Card.Title>
     </Card.Body>
-    <ListGroup className="list-group-flush">
+    {/* <ListGroup className="list-group-flush">
       {props.platform.games.map(game => {
         return <ListGroupItem>{game.title}</ListGroupItem>;
       })}
-    </ListGroup>
+    </ListGroup> */}
     <Card.Body>
       <Card.Link href={`platforms/${props.platform._id}`}>Show Platform</Card.Link>
     </Card.Body>

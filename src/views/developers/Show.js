@@ -18,11 +18,11 @@ const Developer = props => (
       <Col sm={6}>
         <Card.Body>
           <Card.Title>Games</Card.Title>
-          <ListGroup>
+          {/* <ListGroup>
             {props.developer.games.map(game => {
               return <ListGroupItem>{game.title}</ListGroupItem>;
             })}
-          </ListGroup>
+          </ListGroup> */}
         </Card.Body>
         <Card.Body>
           <Card.Title>Developer</Card.Title>
@@ -51,7 +51,7 @@ export default class DeveloperShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:4000/developers/${id}`)
+      .get(`http://localhost:5000/developers/${id}`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +70,7 @@ export default class DeveloperShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:4000/developers/${id}`)
+      .delete(`http://localhost:5000/developers/${id}`)
       .then(response => {
         window.location = "/developers";
       })

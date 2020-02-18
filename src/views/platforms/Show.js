@@ -18,11 +18,11 @@ const Platform = props => (
       <Col sm={6}>
         <Card.Body>
           <Card.Title>Games</Card.Title>
-          <ListGroup>
+          {/* <ListGroup>
             {props.platform.games.map(game => {
               return <ListGroupItem>{game.title}</ListGroupItem>;
             })}
-          </ListGroup>
+          </ListGroup> */}
         </Card.Body>
         <Card.Body>
           <Card.Title>Platform</Card.Title>
@@ -51,7 +51,7 @@ export default class PlatformShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:4000/platforms/${id}`)
+      .get(`http://localhost:5000/platforms/${id}`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +70,7 @@ export default class PlatformShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:4000/platforms/${id}`)
+      .delete(`http://localhost:5000/platforms/${id}`)
       .then(response => {
         window.location = "/platforms";
       })

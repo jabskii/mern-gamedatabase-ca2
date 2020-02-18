@@ -21,11 +21,11 @@ const Genre = props => (
     <Card.Body>
       <Card.Title>{props.genre.name}</Card.Title>
     </Card.Body>
-    <ListGroup className="list-group-flush">
+    {/* <ListGroup className="list-group-flush">
       {props.genre.games.map(game => {
         return <ListGroupItem>{game.title}</ListGroupItem>;
       })}
-    </ListGroup>
+    </ListGroup> */}
     <Card.Body>
       <Card.Link href={`genres/${props.genre._id}`}>Show Genre</Card.Link>
     </Card.Body>

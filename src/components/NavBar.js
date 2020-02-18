@@ -28,9 +28,9 @@ export default class NavBar extends Component {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            {/* <Nav.Link as={Link} to="/">
               Games
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link as={Link} to="/developers">
               Developers
             </Nav.Link>

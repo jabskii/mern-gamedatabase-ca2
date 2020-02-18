@@ -21,11 +21,11 @@ const Game_mode = props => (
     <Card.Body>
       <Card.Title>{props.game_mode.name}</Card.Title>
     </Card.Body>
-    <ListGroup className="list-group-flush">
+    {/* <ListGroup className="list-group-flush">
       {props.game_mode.games.map(game => {
         return <ListGroupItem>{game.title}</ListGroupItem>;
       })}
-    </ListGroup>
+    </ListGroup> */}
     <Card.Body>
       <Card.Link href={`game_modes/${props.game_mode._id}`}>Show Game Mode</Card.Link>
     </Card.Body>

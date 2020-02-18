@@ -19,6 +19,11 @@ const getToken = headers => {
 
 router.route('/').get((req, res) => {
   Game.find()
+    .populate("developer_id")
+    .populate("publisher_id")
+    .populate("genre_id")
+    .populate("platform")
+    .populate("game_mode_id")
     .then(games => res.json(games))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -27,6 +32,11 @@ router.route('/:id').get((req, res) => {
   const gameId = req.params.id;
 
   Game.findById(gameId)
+    .populate("developer_id")
+    .populate("publisher_id")
+    .populate("genre_id")
+    .populate("platform")
+    .populate("game_mode_id")
     .then(result => {
       if (!result) {
         return res.status(404).json({

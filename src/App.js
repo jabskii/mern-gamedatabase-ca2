@@ -75,44 +75,64 @@ class App extends React.Component {
                 <Route path="/games/update/:id" exact component={GameEdit} />
 
                 {/* Developer Routes connected to Compnents */}
-                <Route path="/" exact component={DeveloperIndex} />
                 <Route exact path="/developers/create">
-                  {loggedIn ? <DeveloperCreate /> : <Redirect to="/" />}
+                  {loggedIn ? <DeveloperCreate /> : <Redirect to="/developers" />}
                 </Route>
+                <Route path="/developers" exact component={DeveloperIndex} />
                 <Route path="/developers/:id" exact component={DeveloperShow} />
-                <Route path="/developers/update/:id" exact component={DeveloperEdit} />
+                <Route
+                  path="/developers/update/:id"
+                  exact
+                  component={DeveloperEdit}
+                />
 
                 {/* Publisher Routes connected to Compnents */}
-                <Route path="/" exact component={PublisherIndex} />
                 <Route exact path="/publishers/create">
-                  {loggedIn ? <PublisherCreate /> : <Redirect to="/" />}
+                  {loggedIn ? <PublisherCreate /> : <Redirect to="/publishers" />}
                 </Route>
+                <Route path="/publishers" exact component={PublisherIndex} />
                 <Route path="/publishers/:id" exact component={PublisherShow} />
-                <Route path="/publishers/update/:id" exact component={PublisherEdit} />
+                <Route
+                  path="/publishers/update/:id"
+                  exact
+                  component={PublisherEdit}
+                />
 
                 {/* Genre Routes connected to Compnents */}
-                <Route path="/" exact component={GenreIndex} />
                 <Route exact path="/genres/create">
-                  {loggedIn ? <GenreCreate /> : <Redirect to="/" />}
+                  {loggedIn ? <GenreCreate /> : <Redirect to="/genres" />}
                 </Route>
+                <Route path="/genres" exact component={GenreIndex} />
                 <Route path="/genres/:id" exact component={GenreShow} />
-                <Route path="/genres/update/:id" exact component={GenreEdit} />
+                <Route
+                  path="/genres/update/:id"
+                  exact
+                  component={GenreEdit}
+                />
 
                 {/* Platform Routes connected to Compnents */}
-                <Route path="/" exact component={PlatformIndex} />
                 <Route exact path="/platforms/create">
-                  {loggedIn ? <PlatformCreate /> : <Redirect to="/" />}
+                  {loggedIn ? <PlatformCreate /> : <Redirect to="/platforms" />}
                 </Route>
+                <Route path="/platforms" exact component={PlatformIndex} />
                 <Route path="/platforms/:id" exact component={PlatformShow} />
-                <Route path="/platforms/update/:id" exact component={PlatformEdit} />
+                <Route
+                  path="/platforms/update/:id"
+                  exact
+                  component={PlatformEdit}
+                />
 
                 {/* Game Mode Routes connected to Compnents */}
-                <Route path="/" exact component={GameModeIndex} />
                 <Route exact path="/game_modes/create">
-                  {loggedIn ? <GameModeCreate /> : <Redirect to="/" />}
+                  {loggedIn ? <GameModeCreate /> : <Redirect to="/game_modes" />}
                 </Route>
+                <Route path="/game_modes" exact component={GameModeIndex} />
                 <Route path="/game_modes/:id" exact component={GameModeShow} />
-                <Route path="/game_modes/update/:id" exact component={GameModeEdit} />
+                <Route
+                  path="/game_modes/update/:id"
+                  exact
+                  component={GameModeEdit}
+                />
 
                 {/* User Routes connected to components */}
                 <Route path="/register" exact component={Register} />

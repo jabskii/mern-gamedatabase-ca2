@@ -18,11 +18,11 @@ const Publisher = props => (
       <Col sm={6}>
         <Card.Body>
           <Card.Title>Games</Card.Title>
-          <ListGroup>
+          {/* <ListGroup>
             {props.publisher.games.map(game => {
               return <ListGroupItem>{game.title}</ListGroupItem>;
             })}
-          </ListGroup>
+          </ListGroup> */}
         </Card.Body>
         <Card.Body>
           <Card.Title>Publisher</Card.Title>
@@ -51,7 +51,7 @@ export default class PublisherShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:4000/publishers/${id}`)
+      .get(`http://localhost:5000/publishers/${id}`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +70,7 @@ export default class PublisherShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:4000/publishers/${id}`)
+      .delete(`http://localhost:5000/publishers/${id}`)
       .then(response => {
         window.location = "/publishers";
       })

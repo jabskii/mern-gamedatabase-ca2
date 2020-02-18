@@ -40,6 +40,7 @@ export default class DeveloperCreate extends Component {
     };
 
     console.log(developer);
+    
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'jwtToken'
     );
@@ -48,18 +49,17 @@ export default class DeveloperCreate extends Component {
       .post('http://localhost:5000/developers', developer)
       .then(res => {
         console.log(res.data);
-        window.location = '/';
+        window.location = "/developers";
       })
       .catch(err => {
         console.log(err);
-        window.location = '/developers/create';
       });
   };
 
   render() {
     return (
       <div>
-        <h3>Add new Game</h3>
+        <h3>Add new Developer</h3>
         <Form onSubmit={this.onSubmit} encType="multipart/form-data">
           <Form.Group as={Row} controlId="formHorizontalIGDB">
             <Form.Label column sm={2}>

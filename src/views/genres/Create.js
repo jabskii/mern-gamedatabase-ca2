@@ -38,6 +38,7 @@ export default class GenreCreate extends Component {
     };
 
     console.log(genre);
+    
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'jwtToken'
     );
@@ -46,11 +47,10 @@ export default class GenreCreate extends Component {
       .post('http://localhost:5000/genres', genre)
       .then(res => {
         console.log(res.data);
-        window.location = '/';
+        window.location = "/genres";
       })
       .catch(err => {
         console.log(err);
-        window.location = '/genres/create';
       });
   };
 

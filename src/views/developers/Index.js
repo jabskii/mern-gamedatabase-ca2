@@ -21,11 +21,11 @@ const Developer = props => (
     <Card.Body>
       <Card.Title>{props.developer.name}</Card.Title>
     </Card.Body>
-    <ListGroup className="list-group-flush">
+    {/* <ListGroup className="list-group-flush">
       {props.developer.games.map(game => {
         return <ListGroupItem>{game.title}</ListGroupItem>;
       })}
-    </ListGroup>
+    </ListGroup> */}
     <Card.Body>
       <Card.Link href={`developers/${props.developer._id}`}>Show Developer</Card.Link>
     </Card.Body>

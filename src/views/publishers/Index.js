@@ -19,19 +19,20 @@ import {
 const Publisher = props => (
   <Card>
     <Card.Body>
+      {/* <Card.Img src={defaultPublisher} roundedCircle /> */}
       <Card.Title>{props.publisher.name}</Card.Title>
     </Card.Body>
-    <ListGroup className="list-group-flush">
+    {/* <ListGroup className="list-group-flush">
       {props.publisher.games.map(game => {
         return <ListGroupItem>{game.title}</ListGroupItem>;
       })}
-    </ListGroup>
+    </ListGroup> */}
     <Card.Body>
       <Card.Link href={`publishers/${props.publisher._id}`}>Show Publisher</Card.Link>
     </Card.Body>
 
     <Card.Footer>
-      <small className="text-muted">{props.publisher.igdb_id}</small>
+      <small className="text-muted">{props.publisher.name}</small>
     </Card.Footer>
   </Card>
 );
@@ -116,8 +117,8 @@ export default class PublisherIndex extends Component {
 
         <CardColumns>
           {/* mapping the functional components and looping through them */}
-          {filteredPublishers.map(a => {
-            return <Publisher publisher={a} key={a._id} />;
+          {filteredPublishers.map(p => {
+            return <Publisher publisher={p} key={p._id} />;
           })}
         </CardColumns>
       </>

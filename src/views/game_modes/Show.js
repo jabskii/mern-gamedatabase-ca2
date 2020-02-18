@@ -18,11 +18,11 @@ const Game_mode = props => (
       <Col sm={6}>
         <Card.Body>
           <Card.Title>Games</Card.Title>
-          <ListGroup>
+          {/* <ListGroup>
             {props.game_mode.games.map(game => {
               return <ListGroupItem>{game.title}</ListGroupItem>;
             })}
-          </ListGroup>
+          </ListGroup> */}
         </Card.Body>
         <Card.Body>
           <Card.Title>Game Modes</Card.Title>
@@ -51,7 +51,7 @@ export default class GameModeShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:4000/game_modes/${id}`)
+      .get(`http://localhost:5000/game_modes/${id}`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +70,7 @@ export default class GameModeShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:4000/game_modes/${id}`)
+      .delete(`http://localhost:5000/game_modes/${id}`)
       .then(response => {
         window.location = "/game_modes";
       })
