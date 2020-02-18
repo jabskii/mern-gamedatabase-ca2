@@ -7,19 +7,19 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 const Developer = props => (
-  <option value={props.developer._id}> {props.developer.name} </option>
+  <option value={ props.developer._id }> { props.developer.name } </option>
 );
 const Publisher = props => (
-  <option value={props.publisher._id}>{props.publisher.name}</option>
+  <option value={ props.publisher._id }>{ props.publisher.name }</option>
 );
 const Genre = props => (
-  <option value={props.genre._id}>{props.genre.name}</option>
+  <option value={ props.genre._id }>{ props.genre.name }</option>
 );
 const Platform = props => (
-  <option value={props.platform._id}>{props.platform.name}</option>
+  <option value={ props.platform._id }>{ props.platform.name }</option>
 );
 const Game_mode = props => (
-  <option value={props.game_mode._id}>{props.game_mode.name}</option>
+  <option value={ props.game_mode._id }>{ props.game_mode.name }</option>
 );
 
 export default class BookEdit extends Component {
@@ -52,7 +52,7 @@ export default class BookEdit extends Component {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'jwtToken'
     );
-    axios.get(`http://localhost:5000/games/${id}`).then(result => {
+    axios.get(`http://localhost:5000/games/${ id }`).then(result => {
       console.log(result);
       this.setState({
         igdb_id: result.data.igdb_id,
@@ -109,7 +109,7 @@ export default class BookEdit extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    console.log(`Input name ${name}. Input value ${value}.`);
+    console.log(`Input name ${ name }. Input value ${ value }.`);
 
     this.setState({
       [name]: value
@@ -224,7 +224,7 @@ export default class BookEdit extends Component {
     );
 
     axios
-      .put(`http://localhost:5000/games/${id}`, game)
+      .put(`http://localhost:5000/games/${ id }`, game)
       .then(res => {
         console.log(res.data);
         window.location = '/';
@@ -232,35 +232,32 @@ export default class BookEdit extends Component {
       })
       .catch(err => {
         console.log(err);
-        //    window.location = `/books/update/${id}`;
       });
-
-    // window.location = '/';
   };
 
   developerList() {
     return this.state.developers.map((currentDeveloper, index) => {
-      return <Developer developer={currentDeveloper} key={index} />;
+      return <Developer developer={ currentDeveloper } key={ index } />;
     });
   }
   publisherList() {
     return this.state.publishers.map((currentPublisher, index) => {
-      return <Publisher publisher={currentPublisher} key={index} />;
+      return <Publisher publisher={ currentPublisher } key={ index } />;
     });
   }
   genreList() {
     return this.state.genres.map((currentGenre, index) => {
-      return <Genre genre={currentGenre} key={index} />;
+      return <Genre genre={ currentGenre } key={ index } />;
     });
   }
   platformList() {
     return this.state.platforms.map((currentPlatform, index) => {
-      return <Platform platform={currentPlatform} key={index} />;
+      return <Platform platform={ currentPlatform } key={ index } />;
     });
   }
   game_modeList() {
     return this.state.game_modes.map((currentGame_mode, index) => {
-      return <Game_mode game_mode={currentGame_mode} key={index} />;
+      return <Game_mode game_mode={ currentGame_mode } key={ index } />;
     });
   }
 
@@ -268,44 +265,44 @@ export default class BookEdit extends Component {
     return (
       <div>
         <h3>Update Game</h3>
-        <Form onSubmit={this.onSubmit}>
-          <Form.Group as={Row} controlId="formHorizontalIGDB">
-            <Form.Label column sm={2}>
+        <Form onSubmit={ this.onSubmit }>
+          <Form.Group as={ Row } controlId="formHorizontalIGDB">
+            <Form.Label column sm={ 2 }>
               igdb_id
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="igdb_id"
                 name="igdb_id"
-                value={this.state.igdb_id}
-                onChange={this.handleInputChange}
+                value={ this.state.igdb_id }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalTitle">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalTitle">
+            <Form.Label column sm={ 2 }>
               Title
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Title"
                 name="title"
-                value={this.state.title}
-                onChange={this.handleInputChange}
+                value={ this.state.title }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalDescription">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalDescription">
+            <Form.Label column sm={ 2 }>
               Description
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 as="textarea"
@@ -313,49 +310,49 @@ export default class BookEdit extends Component {
                 type="text"
                 placeholder="Description"
                 name="description"
-                value={this.state.description}
-                onChange={this.handleInputChange}
+                value={ this.state.description }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalReleaseDate">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalReleaseDate">
+            <Form.Label column sm={ 2 }>
               Release Date
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Release Date"
                 name="release_date"
-                value={this.state.release_date}
-                onChange={this.handleInputChange}
+                value={ this.state.release_date }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalMetacriticRating">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalMetacriticRating">
+            <Form.Label column sm={ 2 }>
               Metacritic Rating
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Metacritic Rating"
                 name="metacritic_rating"
-                value={this.state.metacritic_rating}
-                onChange={this.handleInputChange}
+                value={ this.state.metacritic_rating }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalDeveloper">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalDeveloper">
+            <Form.Label column sm={ 2 }>
               Developer
             </Form.Label>
-            <Col sm={4}>
+            <Col sm={ 4 }>
               <InputGroup>
                 <Form.Control
                   required
@@ -363,7 +360,7 @@ export default class BookEdit extends Component {
                   multiple
                   placeholder="Developer"
                   name="developer_id"
-                  onChange={this.addDeveloper}
+                  onChange={ this.addDeveloper }
                 >
                   {this.developerList()}
                 </Form.Control>
@@ -371,11 +368,11 @@ export default class BookEdit extends Component {
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalPublisher">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalPublisher">
+            <Form.Label column sm={ 2 }>
               Publisher
             </Form.Label>
-            <Col sm={4}>
+            <Col sm={ 4 }>
               <InputGroup>
                 <Form.Control
                   required
@@ -383,19 +380,19 @@ export default class BookEdit extends Component {
                   multiple
                   placeholder="Publsiher"
                   name="publisher_id"
-                  onChange={this.addPublisher}
+                  onChange={ this.addPublisher }
                 >
-                  {this.publisherList()}
+                  { this.publisherList() }
                 </Form.Control>
               </InputGroup>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalGenre">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalGenre">
+            <Form.Label column sm={ 2 }>
               Genre
             </Form.Label>
-            <Col sm={4}>
+            <Col sm={ 4 }>
               <InputGroup>
                 <Form.Control
                   required
@@ -403,19 +400,19 @@ export default class BookEdit extends Component {
                   multiple
                   placeholder="Genre"
                   name="genre_id"
-                  onChange={this.addGenre}
+                  onChange={ this.addGenre }
                 >
-                  {this.genreList()}
+                  { this.genreList() }
                 </Form.Control>
               </InputGroup>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalPlatform">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalPlatform">
+            <Form.Label column sm={ 2 }>
               Platform
             </Form.Label>
-            <Col sm={4}>
+            <Col sm={ 4 }>
               <InputGroup>
                 <Form.Control
                   required
@@ -423,19 +420,19 @@ export default class BookEdit extends Component {
                   multiple
                   placeholder="Platform"
                   name="platform_id"
-                  onChange={this.addPlatform}
+                  onChange={ this.addPlatform }
                 >
-                  {this.platformList()}
+                  { this.platformList() }
                 </Form.Control>
               </InputGroup>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalGameMode">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalGameMode">
+            <Form.Label column sm={ 2 }>
               Game Mode(s)
             </Form.Label>
-            <Col sm={4}>
+            <Col sm={ 4 }>
               <InputGroup>
                 <Form.Control
                   required
@@ -443,18 +440,18 @@ export default class BookEdit extends Component {
                   multiple
                   placeholder="Game Mode(s)"
                   name="game_mode_id"
-                  onChange={this.addame_mode}
+                  onChange={ this.addame_mode }
                 >
-                  {this.game_modeList()}
+                  { this.game_modeList() }
                 </Form.Control>
               </InputGroup>
             </Col>
           </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Update Game</Button>
+          <Form.Group as={ Row }>
+            <Col sm={ { span: 10, offset: 2 } }>
+              <Button type="submit">Finish</Button>
             </Col>
           </Form.Group>
         </Form>

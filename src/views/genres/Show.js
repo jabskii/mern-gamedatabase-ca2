@@ -9,30 +9,6 @@ import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 //Functional Components
 const Genre = props => (
   <>
-    <Row>
-      <Col sm={6}>
-        <Card.Body>
-          {/* <Card.Img src={defaultDeveloper} roundedCircle /> */}
-        </Card.Body>
-      </Col>
-      <Col sm={6}>
-        <Card.Body>
-          <Card.Title>Games</Card.Title>
-          {/* <ListGroup>
-            {props.genre.games.map(game => {
-              return <ListGroupItem>{game.title}</ListGroupItem>;
-            })}
-          </ListGroup> */}
-        </Card.Body>
-        <Card.Body>
-          <Card.Title>Genre</Card.Title>
-          <ListGroup>
-            {/* <ListGroupItem>{props.platform.igdb_id}</ListGroupItem> */}
-            <ListGroupItem>{props.genre.name}</ListGroupItem>
-          </ListGroup>
-        </Card.Body>
-      </Col>
-    </Row>
   </>
 );
 
@@ -51,7 +27,7 @@ export default class GenreShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:5000/genres/${id}`)
+      .get(`http://localhost:5000/genres/${ id }`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +46,7 @@ export default class GenreShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:5000/genres/${id}`)
+      .delete(`http://localhost:5000/genres/${ id }`)
       .then(response => {
         window.location = "/genres";
       })
@@ -84,19 +60,19 @@ export default class GenreShow extends Component {
   AlertDismissible() {
     return (
       <>
-        <Alert show={this.state.show} variant="secondary">
+        <Alert show={ this.state.show } variant="secondary">
           <Alert.Heading>Confirm</Alert.Heading>
           <p>
             Are you sure you want to delete this genre -{" "}
-            {this.state.genre.name}
+            { this.state.genre.name }
           </p>
           <hr />
           <div className="d-flex justify-content-end">
             <Button
-              onClick={() => {
+              onClick={ () => {
                 this.setState({ show: false });
                 this.delete();
-              }}
+              } }
               variant="outline-danger"
             >
               Delete
@@ -122,14 +98,14 @@ export default class GenreShow extends Component {
       <>
         <br />
         <Card>
-          {this.AlertDismissible()}
-          <Card.Header as="h5">{this.state.genre.name}</Card.Header>
+          { this.AlertDismissible() }
+          <Card.Header as="h5">{ this.state.genre.name }</Card.Header>
 
-          <Genre genre={this.state.genre} />
+          <Genre genre={ this.state.genre } />
           <Card.Footer>
             <span className="float-left">
               {
-                <Button as={Link} to="/genres" variant="primary">
+                <Button as={ Link } to="/genres" variant="primary">
                   View all genres
                 </Button>
               }
@@ -140,8 +116,9 @@ export default class GenreShow extends Component {
                 <span className="float-left">
                   {
                     <Button
-                      as={Link}
-                      to={`/genres/update/${this.state.genre._id}`}
+                      className="btn-warning ml-2"
+                      as={ Link }
+                      to={`/genres/update/${ this.state.genre._id}` }
                       variant="primary"
                     >
                       Update Genre
@@ -150,7 +127,7 @@ export default class GenreShow extends Component {
                 </span>
                 <span className="float-right">
                   <Button
-                    as={Link}
+                    as={ Link }
                     onClick={() => {
                       this.setState({
                         show: true

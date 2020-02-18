@@ -58,25 +58,25 @@ export default class GameModeCreate extends Component {
     return (
       <div>
         <h3>Add new Game Mode</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalName">
-            <Form.Label column sm={2}>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalName">
+            <Form.Label column sm={ 2 }>
               Name
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                value={ this.state.name }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
+          <Form.Group as={ Row }>
             <Col sm={{ span: 10, offset: 2 }}>
               <Button type="submit">Add Game Mode</Button>
             </Col>

@@ -60,88 +60,88 @@ class App extends React.Component {
     const loggedIn = this.state.loggedIn;
     return (
       <BrowserRouter>
-        <NavBar loggedIn={loggedIn} onLogout={this.authHandler} />
+        <NavBar loggedIn={ loggedIn } onLogout={ this.authHandler } />
         <Container>
           <Row>
             <Col>
               {/* switching in and out components  */}
               <Switch>
                 {/* Game Routes connected to Compnents */}
-                <Route path="/" exact component={GameIndex} />
+                <Route path="/" exact component={ GameIndex } />
                 <Route exact path="/games/create">
-                  {loggedIn ? <GameCreate /> : <Redirect to="/" />}
+                  { loggedIn ? <GameCreate /> : <Redirect to="/" /> }
                 </Route>
-                <Route path="/games/:id" exact component={GameShow} />
-                <Route path="/games/update/:id" exact component={GameEdit} />
+                <Route path="/games/:id" exact component={ GameShow } />
+                <Route path="/games/update/:id" exact component={ GameEdit } />
 
                 {/* Developer Routes connected to Compnents */}
                 <Route exact path="/developers/create">
-                  {loggedIn ? <DeveloperCreate /> : <Redirect to="/developers" />}
+                  { loggedIn ? <DeveloperCreate /> : <Redirect to="/developers" /> }
                 </Route>
-                <Route path="/developers" exact component={DeveloperIndex} />
-                <Route path="/developers/:id" exact component={DeveloperShow} />
+                <Route path="/developers" exact component={ DeveloperIndex } />
+                <Route path="/developers/:id" exact component={ DeveloperShow } />
                 <Route
                   path="/developers/update/:id"
                   exact
-                  component={DeveloperEdit}
+                  component={ DeveloperEdit }
                 />
 
                 {/* Publisher Routes connected to Compnents */}
                 <Route exact path="/publishers/create">
-                  {loggedIn ? <PublisherCreate /> : <Redirect to="/publishers" />}
+                  { loggedIn ? <PublisherCreate /> : <Redirect to="/publishers" /> }
                 </Route>
-                <Route path="/publishers" exact component={PublisherIndex} />
-                <Route path="/publishers/:id" exact component={PublisherShow} />
+                <Route path="/publishers" exact component={ PublisherIndex } />
+                <Route path="/publishers/:id" exact component={ PublisherShow } />
                 <Route
                   path="/publishers/update/:id"
                   exact
-                  component={PublisherEdit}
+                  component={ PublisherEdit }
                 />
 
                 {/* Genre Routes connected to Compnents */}
                 <Route exact path="/genres/create">
-                  {loggedIn ? <GenreCreate /> : <Redirect to="/genres" />}
+                  { loggedIn ? <GenreCreate /> : <Redirect to="/genres" /> }
                 </Route>
-                <Route path="/genres" exact component={GenreIndex} />
-                <Route path="/genres/:id" exact component={GenreShow} />
+                <Route path="/genres" exact component={ GenreIndex } />
+                <Route path="/genres/:id" exact component={ GenreShow } />
                 <Route
                   path="/genres/update/:id"
                   exact
-                  component={GenreEdit}
+                  component={ GenreEdit }
                 />
 
                 {/* Platform Routes connected to Compnents */}
                 <Route exact path="/platforms/create">
-                  {loggedIn ? <PlatformCreate /> : <Redirect to="/platforms" />}
+                  { loggedIn ? <PlatformCreate /> : <Redirect to="/platforms" /> }
                 </Route>
-                <Route path="/platforms" exact component={PlatformIndex} />
-                <Route path="/platforms/:id" exact component={PlatformShow} />
+                <Route path="/platforms" exact component={ PlatformIndex } />
+                <Route path="/platforms/:id" exact component={ PlatformShow } />
                 <Route
                   path="/platforms/update/:id"
                   exact
-                  component={PlatformEdit}
+                  component={ PlatformEdit }
                 />
 
                 {/* Game Mode Routes connected to Compnents */}
                 <Route exact path="/game_modes/create">
-                  {loggedIn ? <GameModeCreate /> : <Redirect to="/game_modes" />}
+                  { loggedIn ? <GameModeCreate /> : <Redirect to="/game_modes" /> }
                 </Route>
-                <Route path="/game_modes" exact component={GameModeIndex} />
-                <Route path="/game_modes/:id" exact component={GameModeShow} />
+                <Route path="/game_modes" exact component={ GameModeIndex } />
+                <Route path="/game_modes/:id" exact component={ GameModeShow } />
                 <Route
                   path="/game_modes/update/:id"
                   exact
-                  component={GameModeEdit}
+                  component={ GameModeEdit }
                 />
 
                 {/* User Routes connected to components */}
-                <Route path="/register" exact component={Register} />
+                <Route path="/register" exact component={ Register } />
                 <Route
                   path="/login"
                   exact
                   component={props => (
                     //passing props down through components
-                    <Login {...props} onLogin={this.authHandler} />
+                    <Login { ...props } onLogin={ this.authHandler } />
                   )}
                 />
               </Switch>

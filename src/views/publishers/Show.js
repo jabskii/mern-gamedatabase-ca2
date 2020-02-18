@@ -9,30 +9,6 @@ import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 //Functional Components
 const Publisher = props => (
   <>
-    <Row>
-      <Col sm={6}>
-        <Card.Body>
-          {/* <Card.Img src={defaultDeveloper} roundedCircle /> */}
-        </Card.Body>
-      </Col>
-      <Col sm={6}>
-        <Card.Body>
-          <Card.Title>Games</Card.Title>
-          {/* <ListGroup>
-            {props.publisher.games.map(game => {
-              return <ListGroupItem>{game.title}</ListGroupItem>;
-            })}
-          </ListGroup> */}
-        </Card.Body>
-        <Card.Body>
-          <Card.Title>Publisher</Card.Title>
-          <ListGroup>
-            <ListGroupItem>{props.publisher.igdb_id}</ListGroupItem>
-            <ListGroupItem>{props.publisher.name}</ListGroupItem>
-          </ListGroup>
-        </Card.Body>
-      </Col>
-    </Row>
   </>
 );
 
@@ -51,7 +27,7 @@ export default class PublisherShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:5000/publishers/${id}`)
+      .get(`http://localhost:5000/publishers/${ id }`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +46,7 @@ export default class PublisherShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:5000/publishers/${id}`)
+      .delete(`http://localhost:5000/publishers/${ id }`)
       .then(response => {
         window.location = "/publishers";
       })
@@ -84,16 +60,16 @@ export default class PublisherShow extends Component {
   AlertDismissible() {
     return (
       <>
-        <Alert show={this.state.show} variant="secondary">
+        <Alert show={ this.state.show } variant="secondary">
           <Alert.Heading>Confirm</Alert.Heading>
           <p>
             Are you sure you want to delete this publisher -{" "}
-            {this.state.publisher.name}
+            { this.state.publisher.name }
           </p>
           <hr />
           <div className="d-flex justify-content-end">
             <Button
-              onClick={() => {
+              onClick={ () => {
                 this.setState({ show: false });
                 this.delete();
               }}
@@ -123,13 +99,13 @@ export default class PublisherShow extends Component {
         <br />
         <Card>
           {this.AlertDismissible()}
-          <Card.Header as="h5">{this.state.publisher.name}</Card.Header>
+          <Card.Header as="h5">{ this.state.publisher.name }</Card.Header>
 
           <Publisher publisher={this.state.publisher} />
           <Card.Footer>
             <span className="float-left">
               {
-                <Button as={Link} to="/publishers" variant="primary">
+                <Button as={ Link } to="/publishers" variant="primary">
                   View all publishers
                 </Button>
               }
@@ -140,8 +116,9 @@ export default class PublisherShow extends Component {
                 <span className="float-left">
                   {
                     <Button
-                      as={Link}
-                      to={`/publishers/update/${this.state.publisher._id}`}
+                      className="btn-warning ml-2"
+                      as={ Link }
+                      to={ `/publishers/update/${ this.state.publisher._id }` }
                       variant="primary"
                     >
                       Update Publisher
@@ -150,7 +127,7 @@ export default class PublisherShow extends Component {
                 </span>
                 <span className="float-right">
                   <Button
-                    as={Link}
+                    as={ Link }
                     onClick={() => {
                       this.setState({
                         show: true

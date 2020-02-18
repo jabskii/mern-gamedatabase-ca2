@@ -21,7 +21,7 @@ export default class GameModeEdit extends Component {
       'jwtToken'
     );
 
-    axios.get(`http://localhost:5000/game_modes/${id}`).then(result => {
+    axios.get(`http://localhost:5000/game_modes/${ id }`).then(result => {
       console.log(result);
       this.setState({
         name: result.data.name
@@ -53,13 +53,13 @@ export default class GameModeEdit extends Component {
     );
 
     axios
-      .put(`http://localhost:5000/game_modes/${id}`, game_mode)
+      .put(`http://localhost:5000/game_modes/${ id }`, game_mode)
       .then(res => {
         console.log(res.data);
       })
       .catch(err => {
         console.log(err);
-        window.location = `/game_modes/update/${id}`;
+        window.location = `/game_modes/update/${ id }`;
       });
     window.location = '/game_modes';
   };
@@ -67,10 +67,10 @@ export default class GameModeEdit extends Component {
   render() {
     return (
       <div>
-        <h3>Add new Game Mode</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalName">
-            <Form.Label column sm={2}>
+        <h3>Edit Game Mode</h3>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalName">
+            <Form.Label column sm={ 2 }>
               Name
             </Form.Label>
             <Col sm={10}>
@@ -79,16 +79,16 @@ export default class GameModeEdit extends Component {
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                value={ this.state.name }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
+          <Form.Group as={ Row }>
             <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Add Game Mode</Button>
+              <Button type="submit">Finish</Button>
             </Col>
           </Form.Group>
         </Form>

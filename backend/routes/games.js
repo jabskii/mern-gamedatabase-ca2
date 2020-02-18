@@ -22,7 +22,7 @@ router.route('/').get((req, res) => {
     .populate("developer_id")
     .populate("publisher_id")
     .populate("genre_id")
-    .populate("platform")
+    .populate("platform_id")
     .populate("game_mode_id")
     .then(games => res.json(games))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -35,7 +35,7 @@ router.route('/:id').get((req, res) => {
     .populate("developer_id")
     .populate("publisher_id")
     .populate("genre_id")
-    .populate("platform")
+    .populate("platform_id")
     .populate("game_mode_id")
     .then(result => {
       if (!result) {

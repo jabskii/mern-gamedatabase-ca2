@@ -59,41 +59,41 @@ export default class Login extends Component {
     return (
       <>
         <h3>Login</h3>
-        <Form onSubmit={this.onSubmit}>
-          <Form.Group as={Row} controlId="formHorizontalIMDB">
-            <Form.Label column sm={2}>
+        <Form onSubmit={ this.onSubmit }>
+          <Form.Group as={ Row } controlId="formHorizontalIMDB">
+            <Form.Label column sm={ 2 }>
               Email
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="email"
                 placeholder="Email"
                 name="email"
-                value={this.state.email}
-                onChange={this.handleInputChange}
+                value={ this.state.email }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalTitle">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalTitle">
+            <Form.Label column sm={ 2 }>
               Password
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="password"
                 placeholder="Password"
                 name="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
+                value={ this.state.password }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
+          <Form.Group as={ Row }>
+            <Col sm={ { span: 10, offset: 2 } }>
               <Button type="submit">Login</Button>
             </Col>
           </Form.Group>

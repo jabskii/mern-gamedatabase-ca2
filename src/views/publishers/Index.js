@@ -19,21 +19,8 @@ import {
 const Publisher = props => (
   <Card>
     <Card.Body>
-      {/* <Card.Img src={defaultPublisher} roundedCircle /> */}
-      <Card.Title>{props.publisher.name}</Card.Title>
+      <Card.Title><a href={ `publishers/${ props.publisher._id }` }>{ props.publisher.name }</a></Card.Title>
     </Card.Body>
-    {/* <ListGroup className="list-group-flush">
-      {props.publisher.games.map(game => {
-        return <ListGroupItem>{game.title}</ListGroupItem>;
-      })}
-    </ListGroup> */}
-    <Card.Body>
-      <Card.Link href={`publishers/${props.publisher._id}`}>Show Publisher</Card.Link>
-    </Card.Body>
-
-    <Card.Footer>
-      <small className="text-muted">{props.publisher.name}</small>
-    </Card.Footer>
   </Card>
 );
 
@@ -79,27 +66,9 @@ export default class PublisherIndex extends Component {
     return (
       <>
         <Row>
-          <Col sm={12}>
-            <h3>Publisher List</h3>
-            <hr />
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={8}>
-            {localStorage.jwtToken != null ? (
-              <Button as={Link} to="/publishers/create">
-                Add Publisher
-              </Button>
-            ) : (
-              <>
-                <Button as={Link} to="/login">
-                  Login to Create
-                </Button>
-              </>
-            )}
-          </Col>
-          <Col sm={4}>
-            <InputGroup className="mb-3">
+          <Col sm={ 12 }>
+            <h3 className="mt-2">Publisher List</h3>
+            <InputGroup className="mt-2 mb-3">
               <InputGroup.Prepend>
                 <InputGroup.Text id="basic-addon1">Search</InputGroup.Text>
               </InputGroup.Prepend>
@@ -108,17 +77,33 @@ export default class PublisherIndex extends Component {
                 name="search"
                 aria-label="Search"
                 aria-describedby="basic-addon1"
-                value={this.state.search}
-                onChange={this.handleInputChange}
+                value={ this.state.search }
+                onChange={ this.handleSearchInput }
               />
             </InputGroup>
+            <hr />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            { localStorage.jwtToken != null ? (
+              <Button className="float-right mb-4" as={ Link } to="/publishers/create">
+                Add Publishers
+              </Button>
+            ) : (
+              <>
+                <Button className="float-right mb-4" as={ Link } to="/login">
+                  Login to Create
+                </Button>
+              </>
+            )}
           </Col>
         </Row>
 
         <CardColumns>
           {/* mapping the functional components and looping through them */}
-          {filteredPublishers.map(p => {
-            return <Publisher publisher={p} key={p._id} />;
+          { filteredPublishers.map(p => {
+            return <Publisher publisher={ p } key={ p._id } />;
           })}
         </CardColumns>
       </>

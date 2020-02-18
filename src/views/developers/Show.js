@@ -9,13 +9,8 @@ import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 //Functional Components
 const Developer = props => (
   <>
-    <Row>
-      <Col sm={6}>
-        <Card.Body>
-          {/* <Card.Img src={defaultDeveloper} roundedCircle /> */}
-        </Card.Body>
-      </Col>
-      <Col sm={6}>
+    <Card>
+    <Col sm={6}>
         <Card.Body>
           <Card.Title>Games</Card.Title>
           {/* <ListGroup>
@@ -24,15 +19,8 @@ const Developer = props => (
             })}
           </ListGroup> */}
         </Card.Body>
-        <Card.Body>
-          <Card.Title>Developer</Card.Title>
-          <ListGroup>
-            <ListGroupItem>{props.developer.igdb_id}</ListGroupItem>
-            <ListGroupItem>{props.developer.name}</ListGroupItem>
-          </ListGroup>
-        </Card.Body>
       </Col>
-    </Row>
+    </Card>
   </>
 );
 
@@ -51,7 +39,7 @@ export default class DeveloperShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:5000/developers/${id}`)
+      .get(`http://localhost:5000/developers/${ id }`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +58,7 @@ export default class DeveloperShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:5000/developers/${id}`)
+      .delete(`http://localhost:5000/developers/${ id }`)
       .then(response => {
         window.location = "/developers";
       })
@@ -84,11 +72,11 @@ export default class DeveloperShow extends Component {
   AlertDismissible() {
     return (
       <>
-        <Alert show={this.state.show} variant="secondary">
+        <Alert show={ this.state.show } variant="secondary">
           <Alert.Heading>Confirm</Alert.Heading>
           <p>
             Are you sure you want to delete this developer -{" "}
-            {this.state.developer.name}
+            { this.state.developer.name }
           </p>
           <hr />
           <div className="d-flex justify-content-end">
@@ -123,9 +111,9 @@ export default class DeveloperShow extends Component {
         <br />
         <Card>
           {this.AlertDismissible()}
-          <Card.Header as="h5">{this.state.developer.name}</Card.Header>
+          <Card.Header as="h5">{ this.state.developer.name }</Card.Header>
 
-          <Developer developer={this.state.developer} />
+          <Developer developer={ this.state.developer } />
           <Card.Footer>
             <span className="float-left">
               {
@@ -140,8 +128,9 @@ export default class DeveloperShow extends Component {
                 <span className="float-left">
                   {
                     <Button
+                      className="btn-warning ml-2"
                       as={Link}
-                      to={`/developers/update/${this.state.developer._id}`}
+                      to={`/developers/update/${ this.state.developer._id }`}
                       variant="primary"
                     >
                       Update Developer

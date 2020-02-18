@@ -16,7 +16,6 @@ export default class NavBar extends Component {
     return (
       <Navbar
         sticky="top"
-        // collapseOnSelect
         expand="lg"
         bg="light"
         variant="light"
@@ -25,37 +24,34 @@ export default class NavBar extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link as={Link} to="/">
-              Home
-            </Nav.Link>
-            {/* <Nav.Link as={Link} to="/">
+            <Nav.Link as={ Link } to="/">
               Games
-            </Nav.Link> */}
-            <Nav.Link as={Link} to="/developers">
+            </Nav.Link>
+            <Nav.Link as={ Link } to="/developers">
               Developers
             </Nav.Link>
-            <Nav.Link as={Link} to="/publishers">
+            <Nav.Link as={ Link } to="/publishers">
               Publishers
             </Nav.Link>
-            <Nav.Link as={Link} to="/genres">
+            <Nav.Link as={ Link } to="/genres">
               Genres
             </Nav.Link>
-            <Nav.Link as={Link} to="/platforms">
+            <Nav.Link as={ Link } to="/platforms">
               Platforms
             </Nav.Link>
-            <Nav.Link as={Link} to="/game_modes">
+            <Nav.Link as={ Link } to="/game_modes">
               Game Modes
             </Nav.Link>
           </Nav>
           <Nav>
-            {loggedIn ? (
-              <Nav.Link onClick={this.logout}>Logout</Nav.Link>
+            { loggedIn ? (
+              <Nav.Link onClick={ this.logout }>Logout</Nav.Link>
             ) : (
               <>
-                <Nav.Link as={Link} to="/register">
+                <Nav.Link as={ Link } to="/register">
                   Register
                 </Nav.Link>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link as={ Link} to="/login">
                   Login
                 </Nav.Link>
               </>

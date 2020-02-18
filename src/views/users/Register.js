@@ -46,41 +46,41 @@ export default class Register extends Component {
     return (
       <div>
         <h3>Register user</h3>
-        <Form onSubmit={this.onSubmit}>
-          <Form.Group as={Row} controlId="formHorizontalIMDB">
-            <Form.Label column sm={2}>
+        <Form onSubmit={ this.onSubmit }>
+          <Form.Group as={ Row } controlId="formHorizontalIMDB">
+            <Form.Label column sm={ 2 }>
               Email
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 type="email"
                 placeholder="Email"
                 required
                 name="email"
-                value={this.state.email}
-                onChange={this.handleInputChange}
+                value={ this.state.emai }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalTitle">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalTitle">
+            <Form.Label column sm={ 2 }>
               Password
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="password"
                 placeholder="Password"
                 name="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
+                value={ this.state.password }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
+          <Form.Group as={ Row }>
+            <Col sm={ { span: 10, offset: 2 } }>
               <Button type="submit">Register</Button>
             </Col>
           </Form.Group>

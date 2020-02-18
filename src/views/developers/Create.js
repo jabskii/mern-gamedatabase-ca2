@@ -60,12 +60,12 @@ export default class DeveloperCreate extends Component {
     return (
       <div>
         <h3>Add new Developer</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalIGDB">
-            <Form.Label column sm={2}>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalIGDB">
+            <Form.Label column sm={ 2 }>
               igdb_id
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
@@ -78,17 +78,17 @@ export default class DeveloperCreate extends Component {
           </Form.Group>
 
           <Form.Group as={Row} controlId="formHorizontalName">
-            <Form.Label column sm={2}>
+            <Form.Label column sm={ 2 }>
               Name
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                value={ this.state.name }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>

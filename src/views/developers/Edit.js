@@ -22,7 +22,7 @@ export default class DeveloperCreate extends Component {
       'jwtToken'
     );
 
-    axios.get(`http://localhost:5000/developers/${id}`).then(result => {
+    axios.get(`http://localhost:5000/developers/${ id }`).then(result => {
       console.log(result);
       this.setState({
         igdb_id: result.data.igdb_id,
@@ -56,13 +56,13 @@ export default class DeveloperCreate extends Component {
     );
 
     axios
-      .put(`http://localhost:5000/developers/${id}`, developer)
+      .put(`http://localhost:5000/developers/${ id }`, developer)
       .then(res => {
         console.log(res.data);
       })
       .catch(err => {
         console.log(err);
-        window.location = `/developers/update/${id}`;
+        window.location = `/developers/update/${ id }`;
       });
     window.location = '/developers';
   };
@@ -70,44 +70,44 @@ export default class DeveloperCreate extends Component {
   render() {
     return (
       <div>
-        <h3>Add new Game</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalIGDB">
-            <Form.Label column sm={2}>
+        <h3>Edit Developer</h3>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalIGDB">
+            <Form.Label column sm={ 2 }>
               igdb_id
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="igdb_id"
                 name="igdb_id"
-                value={this.state.igdb_id}
-                onChange={this.handleInputChange}
+                value={ this.state.igdb_id }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalName">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalName">
+            <Form.Label column sm={ 2 }>
               Name
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                value={ this.state.name }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
+          <Form.Group as={ Row }>
             <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Add Developer</Button>
+              <Button type="submit">Finish</Button>
             </Col>
           </Form.Group>
         </Form>

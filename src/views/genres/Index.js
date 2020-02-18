@@ -19,20 +19,8 @@ import {
 const Genre = props => (
   <Card>
     <Card.Body>
-      <Card.Title>{props.genre.name}</Card.Title>
+      <Card.Title><a href={ `genres/${props.genre._id}` }>{ props.genre.name }</a></Card.Title>
     </Card.Body>
-    {/* <ListGroup className="list-group-flush">
-      {props.genre.games.map(game => {
-        return <ListGroupItem>{game.title}</ListGroupItem>;
-      })}
-    </ListGroup> */}
-    <Card.Body>
-      <Card.Link href={`genres/${props.genre._id}`}>Show Genre</Card.Link>
-    </Card.Body>
-
-    <Card.Footer>
-      {/* <small className="text-muted">{props.Plaform.igdb_id}</small> */}
-    </Card.Footer>
   </Card>
 );
 
@@ -78,27 +66,9 @@ export default class GenreIndex extends Component {
     return (
       <>
         <Row>
-          <Col sm={12}>
-            <h3>Genre List</h3>
-            <hr />
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={8}>
-            {localStorage.jwtToken != null ? (
-              <Button as={Link} to="/genres/create">
-                Add Genre
-              </Button>
-            ) : (
-              <>
-                <Button as={Link} to="/login">
-                  Login to Create
-                </Button>
-              </>
-            )}
-          </Col>
-          <Col sm={4}>
-            <InputGroup className="mb-3">
+          <Col sm={ 12 }>
+            <h3 className="mt-2">Genre List</h3>
+            <InputGroup className="mt-2 mb-3">
               <InputGroup.Prepend>
                 <InputGroup.Text id="basic-addon1">Search</InputGroup.Text>
               </InputGroup.Prepend>
@@ -107,17 +77,33 @@ export default class GenreIndex extends Component {
                 name="search"
                 aria-label="Search"
                 aria-describedby="basic-addon1"
-                value={this.state.search}
-                onChange={this.handleInputChange}
+                value={ this.state.search }
+                onChange={ this.handleSearchInput }
               />
             </InputGroup>
+            <hr />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {localStorage.jwtToken != null ? (
+              <Button className="float-right mb-4" as={ Link } to="/genres/create">
+                Add Genres
+              </Button>
+            ) : (
+              <>
+                <Button className="float-right mb-4" as={ Link } to="/login">
+                  Login to Create
+                </Button>
+              </>
+            )}
           </Col>
         </Row>
 
         <CardColumns>
           {/* mapping the functional components and looping through them */}
           {filteredGenres.map(a => {
-            return <Genre genre={a} key={a._id} />;
+            return <Genre genre={ a } key={ a._id } />;
           })}
         </CardColumns>
       </>

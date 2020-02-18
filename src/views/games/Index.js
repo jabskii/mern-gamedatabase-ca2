@@ -17,15 +17,8 @@ import {
 const Game = props => (
   <Card>
     <Card.Body>
-      <Card.Title>{props.game.title}</Card.Title>
-      <Card.Text>{props.game.description}</Card.Text>
+      <Card.Title><a href={ `games/${ props.game._id }` }>{ props.game.title }</a></Card.Title>
     </Card.Body>
-    <Card.Body>
-      <Card.Link href={`games/${props.game._id}`}>Show Game</Card.Link>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">{props.game.lastUpdated}</small>
-    </Card.Footer>
   </Card>
 );
 
@@ -58,7 +51,7 @@ export default class GameIndex extends Component {
     const value = target.value;
     const name = target.name;
 
-    console.log(`Input name ${name}. Input value ${value}.`);
+    console.log(`Input name ${ name }. Input value ${ value }.`);
 
     this.setState({
       [name]: value
@@ -70,7 +63,7 @@ export default class GameIndex extends Component {
     const value = target.value;
     const name = target.name;
 
-    console.log(`Input name ${name}. Input value ${value}.`);
+    console.log(`Input name ${ name }. Input value ${ value }.`);
 
     this.setState({
       search: value
@@ -88,26 +81,8 @@ export default class GameIndex extends Component {
       <>
         <Row>
           <Col sm={12}>
-            <h3>Game List</h3>
-            <hr />
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={8}>
-            {localStorage.jwtToken != null ? (
-              <Button as={Link} to="/games/create">
-                Add Game
-              </Button>
-            ) : (
-              <>
-                <Button as={Link} to="/login">
-                  Login to Create
-                </Button>
-              </>
-            )}
-          </Col>
-          <Col sm={4}>
-            <InputGroup className="mb-3">
+            <h3 className="mt-2">Game List</h3>
+            <InputGroup className="mt-2 mb-3">
               <InputGroup.Prepend>
                 <InputGroup.Text id="basic-addon1">Search</InputGroup.Text>
               </InputGroup.Prepend>
@@ -116,16 +91,32 @@ export default class GameIndex extends Component {
                 name="search"
                 aria-label="Search"
                 aria-describedby="basic-addon1"
-                value={this.state.search}
-                onChange={this.handleSearchInput}
+                value={ this.state.search }
+                onChange={ this.handleSearchInput }
               />
             </InputGroup>
+            <hr />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {localStorage.jwtToken != null ? (
+              <Button className="float-right mb-4" as={ Link } to="/games/create">
+                Add Game
+              </Button>
+            ) : (
+              <>
+                <Button className="float-right mb-4" as={ Link } to="/login">
+                  Login to Create
+                </Button>
+              </>
+            )}
           </Col>
         </Row>
 
         <CardColumns>
           {filteredGames.map(b => {
-            return <Game game={b} key={b._id} />;
+            return <Game game={ b } key={ b._id } />;
           })}
         </CardColumns>
       </>

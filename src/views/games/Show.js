@@ -7,18 +7,18 @@ import Button from 'react-bootstrap/Button';
 import { Alert, Row, Col, ListGroupItem, ListGroup } from 'react-bootstrap';
 
 const Developer = props => {
-  return <ListGroupItem>{props.developer}</ListGroupItem>;
+  return <ListGroupItem>{ props.developer }</ListGroupItem>;
 };
 const Publisher = props => {
-  return <ListGroupItem>{props.publisher}</ListGroupItem>;
+  return <ListGroupItem>{ props.publisher }</ListGroupItem>;
 };
 const Platform = props => {
-  return <ListGroupItem>{props.platform}</ListGroupItem>;
+  return <ListGroupItem>{ props.platform }</ListGroupItem>;
 };
 const Game_mode = props => {
-  return <ListGroupItem>{props.game_mode}</ListGroupItem>;
+  return <ListGroupItem>{ props.game_mode }</ListGroupItem>;
 };
-const Genre = props => <Badge variant="light">{props.genre}</Badge>;
+const Genre = props => <Badge variant="light">{ props.genre }</Badge>;
 
 export default class GameShow extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export default class GameShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:5000/games/${id}`)
+      .get(`http://localhost:5000/games/${ id }`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -55,7 +55,7 @@ export default class GameShow extends Component {
       'jwtToken'
     );
     axios
-      .delete(`http://localhost:5000/games/${id}`)
+      .delete(`http://localhost:5000/games/${ id }`)
       .then(response => {
         console.log(response);
         window.location = '/';
@@ -67,41 +67,41 @@ export default class GameShow extends Component {
 
   developerList() {
     return this.state.game.developer_id.map((currentDeveloper, index) => {
-      return <Developer developer={currentDeveloper.name} key={index} />;
+      return <Developer developer={ currentDeveloper.name } key={ index } />;
     });
   }
 
   publisherList() {
     return this.state.game.publisher_id.map((currentPublisher, index) => {
-      return <Publisher publisher={currentPublisher.name} key={index} />;
+      return <Publisher publisher={ currentPublisher.name } key={ index } />;
     });
   }
 
   platformList() {
     return this.state.game.platform_id.map((currentPlatform, index) => {
-      return <Platform platform={currentPlatform.name} key={index} />;
+      return <Platform platform={ currentPlatform.name } key={ index } />;
     });
   }
 
   game_modeList() {
     return this.state.game.game_mode_id.map((currentGame_mode, index) => {
-      return <Game_mode game_mode={currentGame_mode.name} key={index} />;
+      return <Game_mode game_mode={ currentGame_mode.name } key={ index } />;
     });
   }
 
   genreList() {
     return this.state.game.genre_id.map((currentGenre, index) => {
-      return <Genre genre={currentGenre.name} key={index} />;
+      return <Genre genre={ currentGenre.name } key={ index } />;
     });
   }
 
   AlertDismissible() {
     return (
       <>
-        <Alert show={this.state.show} variant="secondary">
+        <Alert show={ this.state.show } variant="secondary">
           <Alert.Heading>Confirm</Alert.Heading>
           <p>
-            Are you sure you want to delete this game - {this.state.game.title}
+            Are you sure you want to delete this game - { this.state.game.title }
           </p>
           <hr />
           <div className="d-flex justify-content-end">
@@ -137,41 +137,49 @@ export default class GameShow extends Component {
         <Card>
           {this.AlertDismissible()}
           <Card.Header as="h5">
-            {game.title} <span className="float-right">{this.genreList()}</span>
+            { game.title } <span className="float-right">{ this.genreList() }</span>
           </Card.Header>
 
           <Row>
-            <Col sm={6}>
+            <Col sm={ 12 }>
               <Card.Body>
-                {/* <Card.Img src={placeholder} roundedCircle /> */}
+                <Card.Title>Description</Card.Title>
+                <Card.Text>{ this.state.game.description }</Card.Text>
+              </Card.Body>
+            </Col>
+            <Col sm={ 6 }>
+            <Card.Body>
+              <Card.Title>Developer(s)</Card.Title>
+              <ListGroup>{ this.developerList() }</ListGroup>
+            </Card.Body>
+            <Card.Body>
+              <Card.Title>Publisher(s)</Card.Title>
+              <ListGroup>{ this.publisherList() }</ListGroup>
               </Card.Body>
             </Col>
             <Col sm={6}>
-              <Card.Body>
-                <Card.Title>Synopsis</Card.Title>
-                <Card.Text>{this.state.game.description}</Card.Text>
-              </Card.Body>
-              <Card.Body>
-                <Card.Title>Developer(s)</Card.Title>
-                <ListGroup>{this.developerList()}</ListGroup>
-              </Card.Body>
+            <Card.Body>
+              <Card.Title>Platform(s)</Card.Title>
+              <ListGroup>{ this.platformList() }</ListGroup>
+            </Card.Body>
             </Col>
           </Row>
           <Card.Footer>
             <span className="float-left mr-2">
               {
-                <Button as={Link} to="/" variant="primary">
+                <Button as={ Link } to="/" variant="primary">
                   View all games
                 </Button>
               }
             </span>
-            {localStorage.jwtToken != null ? (
+            { localStorage.jwtToken != null ? (
               <>
                 <span className="float-left">
                   {
                     <Button
-                      as={Link}
-                      to={`/games/update/${this.state.game._id}`}
+                      className="btn-warning"
+                      as={ Link }
+                      to={ `/games/update/${this.state.game._id}` }
                       variant="primary"
                     >
                       Update game
@@ -180,7 +188,7 @@ export default class GameShow extends Component {
                 </span>
                 <span className="float-right">
                   <Button
-                    as={Link}
+                    as={ Link }
                     onClick={() => {
                       this.setState({
                         show: true

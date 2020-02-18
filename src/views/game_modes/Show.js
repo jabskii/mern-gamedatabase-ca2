@@ -9,30 +9,6 @@ import { ListGroup, ListGroupItem, Row, Col } from "react-bootstrap";
 //Functional Components
 const Game_mode = props => (
   <>
-    <Row>
-      <Col sm={6}>
-        <Card.Body>
-          {/* <Card.Img src={defaultDeveloper} roundedCircle /> */}
-        </Card.Body>
-      </Col>
-      <Col sm={6}>
-        <Card.Body>
-          <Card.Title>Games</Card.Title>
-          {/* <ListGroup>
-            {props.game_mode.games.map(game => {
-              return <ListGroupItem>{game.title}</ListGroupItem>;
-            })}
-          </ListGroup> */}
-        </Card.Body>
-        <Card.Body>
-          <Card.Title>Game Modes</Card.Title>
-          <ListGroup>
-            {/* <ListGroupItem>{props.platform.igdb_id}</ListGroupItem> */}
-            <ListGroupItem>{props.game_mode.name}</ListGroupItem>
-          </ListGroup>
-        </Card.Body>
-      </Col>
-    </Row>
   </>
 );
 
@@ -51,7 +27,7 @@ export default class GameModeShow extends Component {
     const { id } = this.props.match.params;
 
     axios
-      .get(`http://localhost:5000/game_modes/${id}`)
+      .get(`http://localhost:5000/game_modes/${ id }`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -70,7 +46,7 @@ export default class GameModeShow extends Component {
       "jwtToken"
     );
     axios
-      .delete(`http://localhost:5000/game_modes/${id}`)
+      .delete(`http://localhost:5000/game_modes/${ id }`)
       .then(response => {
         window.location = "/game_modes";
       })
@@ -84,11 +60,11 @@ export default class GameModeShow extends Component {
   AlertDismissible() {
     return (
       <>
-        <Alert show={this.state.show} variant="secondary">
+        <Alert show={ this.state.show } variant="secondary">
           <Alert.Heading>Confirm</Alert.Heading>
           <p>
             Are you sure you want to delete this game mode -{" "}
-            {this.state.game_mode.name}
+            { this.state.game_mode.name }
           </p>
           <hr />
           <div className="d-flex justify-content-end">
@@ -129,7 +105,7 @@ export default class GameModeShow extends Component {
           <Card.Footer>
             <span className="float-left">
               {
-                <Button as={Link} to="/game_modes" variant="primary">
+                <Button as={ Link } to="/game_modes" variant="primary">
                   View all Game modes
                 </Button>
               }
@@ -140,8 +116,9 @@ export default class GameModeShow extends Component {
                 <span className="float-left">
                   {
                     <Button
-                      as={Link}
-                      to={`/game_modes/update/${this.state.game_mode._id}`}
+                      className="btn-warning ml-2"
+                      as={ Link }
+                      to={`/game_modes/update/${ this.state.game_mode._id }`}
                       variant="primary"
                     >
                       Update Game mode
@@ -150,7 +127,7 @@ export default class GameModeShow extends Component {
                 </span>
                 <span className="float-right">
                   <Button
-                    as={Link}
+                    as={ Link }
                     onClick={() => {
                       this.setState({
                         show: true

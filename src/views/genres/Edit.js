@@ -22,7 +22,7 @@ export default class GenreEdit extends Component {
       'jwtToken'
     );
 
-    axios.get(`http://localhost:5000/genres/${id}`).then(result => {
+    axios.get(`http://localhost:5000/genres/${ id }`).then(result => {
       console.log(result);
       this.setState({
         name: result.data.name
@@ -54,13 +54,13 @@ export default class GenreEdit extends Component {
     );
 
     axios
-      .put(`http://localhost:5000/genres/${id}`, genre)
+      .put(`http://localhost:5000/genres/${ id }`, genre)
       .then(res => {
         console.log(res.data);
       })
       .catch(err => {
         console.log(err);
-        window.location = `/genres/update/${id}`;
+        window.location = `/genres/update/${ id }`;
       });
     window.location = '/genres';
   };
@@ -68,28 +68,28 @@ export default class GenreEdit extends Component {
   render() {
     return (
       <div>
-        <h3>Add new Genre</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalName">
-            <Form.Label column sm={2}>
+        <h3>Edit Genre</h3>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalName">
+            <Form.Label column sm={ 2 }>
               Name
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                value={ this.state.name }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Add Genre</Button>
+          <Form.Group as={ Row }>
+            <Col sm={ { span: 10, offset: 2 } }>
+              <Button type="submit">Finish</Button>
             </Col>
           </Form.Group>
         </Form>

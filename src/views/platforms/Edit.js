@@ -22,7 +22,7 @@ export default class PlatformEdit extends Component {
       'jwtToken'
     );
 
-    axios.get(`http://localhost:5000/platforms/${id}`).then(result => {
+    axios.get(`http://localhost:5000/platforms/${ id }`).then(result => {
       console.log(result);
       this.setState({
         igdb_id: result.data.igdb_id,
@@ -56,13 +56,13 @@ export default class PlatformEdit extends Component {
     );
 
     axios
-      .put(`http://localhost:5000/platforms/${id}`, platform)
+      .put(`http://localhost:5000/platforms/${ id }`, platform)
       .then(res => {
         console.log(res.data);
       })
       .catch(err => {
         console.log(err);
-        window.location = `/platforms/update/${id}`;
+        window.location = `/platforms/update/${ id }`;
       });
     window.location = '/platforms';
   };
@@ -70,28 +70,28 @@ export default class PlatformEdit extends Component {
   render() {
     return (
       <div>
-        <h3>Add new Platform</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalName">
-            <Form.Label column sm={2}>
+        <h3>Edit Platform</h3>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalName">
+            <Form.Label column sm={ 2 }>
               Name
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                value={ this.state.name }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Add Platform</Button>
+          <Form.Group as={ Row }>
+            <Col sm={ { span: 10, offset: 2 } }>
+              <Button type="submit">Finish</Button>
             </Col>
           </Form.Group>
         </Form>

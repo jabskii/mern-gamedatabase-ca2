@@ -59,43 +59,43 @@ export default class PublisherCreate extends Component {
   render() {
     return (
       <div>
-        <h3>Add new Game</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalIGDB">
-            <Form.Label column sm={2}>
+        <h3>Add new Publisher</h3>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalIGDB">
+            <Form.Label column sm={ 2 }>
               igdb_id
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="igdb_id"
                 name="igdb_id"
-                value={this.state.igdb_id}
-                onChange={this.handleInputChange}
+                value={ this.state.igdb_id }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalName">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalName">
+            <Form.Label column sm={ 2 }>
               Name
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                value={ this.state.name }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
+          <Form.Group as={ Row }>
+            <Col sm={ { span: 10, offset: 2 } }>
               <Button type="submit">Add Publisher</Button>
             </Col>
           </Form.Group>
