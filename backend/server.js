@@ -1,4 +1,4 @@
-// backend code
+// backend init code
 
 // required modules for server.js
 const express = require('express');
@@ -28,22 +28,23 @@ app.use(cors()); // skips the same-origin policy and access resources from remot
 
 // MongoDB connect method
 mongoose.connect(
-  ATLAS_URI,
-  { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
-  // callback execution to mongoDB
-  function(err) {
-    if (err) {
-      throw err;
-    } else {
-      console.log('MongoDB database connection established successfully');
-    }
-  }
+	ATLAS_URI,
+	{ useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+	// callback execution to mongoDB
+	function(err) {
+		if (err) {
+			throw err;
+		} else {
+			console.log('MongoDB database connection established successfully');
+		}
+	}
 );
 
 app.get('/', (req, res) => {
-  res.json({ message: 'You are in the root route' });
+	res.json({ message: 'You are in the root route' });
 });
 
+// model routes for HTTP request
 app.use('/account', usersRouter);
 app.use('/games', gamesRouter);
 app.use('/developers', developersRouter);
@@ -54,5 +55,5 @@ app.use('/game_modes', game_modesRouter);
 
 // logs the listening port
 app.listen(port, () => {
-  console.log(`Server listening on ${port}`);
+	console.log(`Server listening on ${port}`);
 });

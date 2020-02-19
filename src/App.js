@@ -42,115 +42,120 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loggedIn: localStorage.getItem('jwtToken') !== null
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			loggedIn: localStorage.getItem('jwtToken') !== null
+		};
+	}
 
-  //Handeling the login, setting state and props
-  authHandler = () => {
-    this.setState((state, props) => ({
-      loggedIn: state.loggedIn ? false : true
-    }));
-  };
+	authHandler = () => {
+		this.setState((state, props) => ({
+			loggedIn: state.loggedIn ? false : true
+		}));
+	};
 
-  render() {
-    const loggedIn = this.state.loggedIn;
-    return (
-      <BrowserRouter>
-        <NavBar loggedIn={ loggedIn } onLogout={ this.authHandler } />
-        <Container>
-          <Row>
-            <Col>
-              {/* switching in and out components  */}
-              <Switch>
-                {/* Game Routes connected to Compnents */}
-                <Route path="/" exact component={ GameIndex } />
-                <Route exact path="/games/create">
-                  { loggedIn ? <GameCreate /> : <Redirect to="/" /> }
-                </Route>
-                <Route path="/games/:id" exact component={ GameShow } />
-                <Route path="/games/update/:id" exact component={ GameEdit } />
+	render() {
+		const loggedIn = this.state.loggedIn;
+		return (
+			<BrowserRouter>
+				<NavBar loggedIn={loggedIn} onLogout={this.authHandler} />
+				<Container>
+					<Row>
+						<Col>
+							<Switch>
+								{/* Game Route Compnents */}
+								<Route path='/' exact component={GameIndex} />
+								<Route exact path='/games/create'>
+									{loggedIn ? <GameCreate /> : <Redirect to='/' />}
+								</Route>
+								<Route path='/games/:id' exact component={GameShow} />
+								<Route path='/games/update/:id' exact component={GameEdit} />
 
-                {/* Developer Routes connected to Compnents */}
-                <Route exact path="/developers/create">
-                  { loggedIn ? <DeveloperCreate /> : <Redirect to="/developers" /> }
-                </Route>
-                <Route path="/developers" exact component={ DeveloperIndex } />
-                <Route path="/developers/:id" exact component={ DeveloperShow } />
-                <Route
-                  path="/developers/update/:id"
-                  exact
-                  component={ DeveloperEdit }
-                />
+								{/* Developer Route Compnents */}
+								<Route exact path='/developers/create'>
+									{loggedIn ? (
+										<DeveloperCreate />
+									) : (
+										<Redirect to='/developers' />
+									)}
+								</Route>
+								<Route path='/developers' exact component={DeveloperIndex} />
+								<Route path='/developers/:id' exact component={DeveloperShow} />
+								<Route
+									path='/developers/update/:id'
+									exact
+									component={DeveloperEdit}
+								/>
 
-                {/* Publisher Routes connected to Compnents */}
-                <Route exact path="/publishers/create">
-                  { loggedIn ? <PublisherCreate /> : <Redirect to="/publishers" /> }
-                </Route>
-                <Route path="/publishers" exact component={ PublisherIndex } />
-                <Route path="/publishers/:id" exact component={ PublisherShow } />
-                <Route
-                  path="/publishers/update/:id"
-                  exact
-                  component={ PublisherEdit }
-                />
+								{/* Publisher Route Compnents */}
+								<Route exact path='/publishers/create'>
+									{loggedIn ? (
+										<PublisherCreate />
+									) : (
+										<Redirect to='/publishers' />
+									)}
+								</Route>
+								<Route path='/publishers' exact component={PublisherIndex} />
+								<Route path='/publishers/:id' exact component={PublisherShow} />
+								<Route
+									path='/publishers/update/:id'
+									exact
+									component={PublisherEdit}
+								/>
 
-                {/* Genre Routes connected to Compnents */}
-                <Route exact path="/genres/create">
-                  { loggedIn ? <GenreCreate /> : <Redirect to="/genres" /> }
-                </Route>
-                <Route path="/genres" exact component={ GenreIndex } />
-                <Route path="/genres/:id" exact component={ GenreShow } />
-                <Route
-                  path="/genres/update/:id"
-                  exact
-                  component={ GenreEdit }
-                />
+								{/* Genre Route Compnents */}
+								<Route exact path='/genres/create'>
+									{loggedIn ? <GenreCreate /> : <Redirect to='/genres' />}
+								</Route>
+								<Route path='/genres' exact component={GenreIndex} />
+								<Route path='/genres/:id' exact component={GenreShow} />
+								<Route path='/genres/update/:id' exact component={GenreEdit} />
 
-                {/* Platform Routes connected to Compnents */}
-                <Route exact path="/platforms/create">
-                  { loggedIn ? <PlatformCreate /> : <Redirect to="/platforms" /> }
-                </Route>
-                <Route path="/platforms" exact component={ PlatformIndex } />
-                <Route path="/platforms/:id" exact component={ PlatformShow } />
-                <Route
-                  path="/platforms/update/:id"
-                  exact
-                  component={ PlatformEdit }
-                />
+								{/* Platform Route Compnents */}
+								<Route exact path='/platforms/create'>
+									{loggedIn ? <PlatformCreate /> : <Redirect to='/platforms' />}
+								</Route>
+								<Route path='/platforms' exact component={PlatformIndex} />
+								<Route path='/platforms/:id' exact component={PlatformShow} />
+								<Route
+									path='/platforms/update/:id'
+									exact
+									component={PlatformEdit}
+								/>
 
-                {/* Game Mode Routes connected to Compnents */}
-                <Route exact path="/game_modes/create">
-                  { loggedIn ? <GameModeCreate /> : <Redirect to="/game_modes" /> }
-                </Route>
-                <Route path="/game_modes" exact component={ GameModeIndex } />
-                <Route path="/game_modes/:id" exact component={ GameModeShow } />
-                <Route
-                  path="/game_modes/update/:id"
-                  exact
-                  component={ GameModeEdit }
-                />
+								{/* Game Mode Route Compnents */}
+								<Route exact path='/game_modes/create'>
+									{loggedIn ? (
+										<GameModeCreate />
+									) : (
+										<Redirect to='/game_modes' />
+									)}
+								</Route>
+								<Route path='/game_modes' exact component={GameModeIndex} />
+								<Route path='/game_modes/:id' exact component={GameModeShow} />
+								<Route
+									path='/game_modes/update/:id'
+									exact
+									component={GameModeEdit}
+								/>
 
-                {/* User Routes connected to components */}
-                <Route path="/register" exact component={ Register } />
-                <Route
-                  path="/login"
-                  exact
-                  component={props => (
-                    //passing props down through components
-                    <Login { ...props } onLogin={ this.authHandler } />
-                  )}
-                />
-              </Switch>
-            </Col>
-          </Row>
-        </Container>
-      </BrowserRouter>
-    );
-  }
+								{/* User Route components */}
+								<Route path='/register' exact component={Register} />
+								<Route
+									path='/login'
+									exact
+									component={props => (
+										<Login {...props} onLogin={this.authHandler} />
+									)}
+								/>
+							</Switch>
+						</Col>
+					</Row>
+				</Container>
+			</BrowserRouter>
+		);
+	}
 }
 
 export default App;
