@@ -6,20 +6,20 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-const Developers = props => (
-  <option value={props.developer._id}> {props.developer.name} </option>
+const Developer = props => (
+  <option value={ props.developer._id }> { props.developer.name } </option>
 );
-const Publishers = props => (
-  <option value={props.publisher._id}>{props.publisher.name}</option>
+const Publisher = props => (
+  <option value={ props.publisher._id }>{ props.publisher.name }</option>
 );
-const Genres = props => (
-  <option value={props.genre._id}>{props.genre.name}</option>
+const Genre = props => (
+  <option value={ props.genre._id }>{ props.genre.name }</option>
 );
-const Platforms = props => (
-  <option value={props.platform._id}>{props.platform.name}</option>
+const Platform = props => (
+  <option value={ props.platform._id }>{ props.platform.name }</option>
 );
-const Game_modes = props => (
-  <option value={props.game_mode._id}>{props.game_mode.name}</option>
+const Game_mode = props => (
+  <option value={ props.game_mode._id }>{ props.game_mode.name }</option>
 );
 
 export default class GameCreate extends Component {
@@ -41,7 +41,7 @@ export default class GameCreate extends Component {
       platforms: [],
       platform_id: [],
       game_modes: [],
-      game_mode: []
+      game_mode_id: []
     };
   }
 
@@ -49,6 +49,7 @@ export default class GameCreate extends Component {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'jwtToken'
     );
+
     axios.get(`http://localhost:5000/developers`).then(developers => {
       console.log(developers);
       this.setState({
@@ -178,92 +179,114 @@ export default class GameCreate extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    // console.log(this.state.developer_id);
     let developerJSON = this.state.developer_id;
     let publisherJSON = this.state.publisher_id;
     let genreJSON = this.state.genre_id;
     let platformJSON = this.state.platform_id;
+    let game_modeJSON = this.state.game_mode_id;
 
-    const book = {
-      isbn: this.state.isbn,
+    const game = {
+      igdb_id: this.state.igdb_id,
       title: this.state.title,
       description: this.state.description,
+      release_date: this.state.release_date,
+      metacritic_rating: this.state.metacritic_rating,
+      developer_id: developerJSON,
+      publisher_id: publisherJSON,
       genre_id: genreJSON,
-      author_id: authorJSON
-      // cover: this.state.cover
+      platform_id: platformJSON,
+      game_mode_id: game_modeJSON
     };
 
-    console.log(book);
+    console.log(game);
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'jwtToken'
     );
 
     axios
-      .post('http://localhost:4000/books', book)
+      .post('http://localhost:5000/games', game)
       .then(res => {
         console.log(res.data);
         window.location = '/';
       })
       .catch(err => {
         console.log(err);
-        window.location = '/books/create';
+        window.location = '/games/create';
       });
   };
 
-  genreList() {
-    return this.state.genres.map((currentGenre, index) => {
-      return <Genre genre={currentGenre} key={index} />;
+  developerList() {
+    return this.state.developers.map((currentDeveloper, index) => {
+      return <Developer developer={ currentDeveloper } key={ index } />;
     });
   }
-  authorList() {
-    return this.state.authors.map((currentAuthor, index) => {
-      return <Author author={currentAuthor} key={index} />;
+  publisherList() {
+    return this.state.publishers.map((currentPublisher, index) => {
+      return <Publisher publisher={ currentPublisher } key={ index } />;
+    });
+  }
+  genreList() {
+    return this.state.genres.map((currentGenre, index) => {
+      return <Genre genre={ currentGenre } key={ index } />;
+    });
+  }
+  platformList() {
+    return this.state.platforms.map((currentPlatform, index) => {
+      return <Platform platform={ currentPlatform } key={ index } />;
+    });
+  }
+  game_modeList() {
+    return this.state.game_modes.map((currentGame_mode, index) => {
+      return <Game_mode game_mode={ currentGame_mode } key={ index } />;
     });
   }
 
   render() {
     return (
       <div>
-        <h3>Add new Book</h3>
-        <Form onSubmit={this.onSubmit} encType="multipart/form-data">
-          <Form.Group as={Row} controlId="formHorizontalISBN">
+        <h3>Add new Game</h3>
+        <Form onSubmit={ this.onSubmit } encType="multipart/form-data">
+          <Form.Group as={ Row } controlId="formHorizontalIGDB">
             <Form.Label column sm={2}>
-              ISBN
+              igdb_id
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
-                placeholder="ISBN"
-                name="isbn"
-                value={this.state.isbn}
-                onChange={this.handleInputChange}
+                placeholder="igdb_id"
+                name="igdb_id"
+                value={ this.state.igdb_id }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalTitle">
-            <Form.Label column sm={2}>
+          <Form.Group as={ Row } controlId="formHorizontalTitle">
+            <Form.Label column sm={ 2 }>
               Title
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={ 10 }>
               <Form.Control
                 required
                 type="text"
                 placeholder="Title"
                 name="title"
-                value={this.state.title}
-                onChange={this.handleInputChange}
+                value={ this.state.title }
+                onChange={ this.handleInputChange }
               />
             </Col>
           </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalDescription">
-            <Form.Label column sm={2}>
+
+          <Form.Group as={ Row } controlId="formHorizontalDescription">
+            <Form.Label column sm={ 2 }>
               Description
             </Form.Label>
             <Col sm={10}>
               <Form.Control
                 required
+                as="textarea"
+                rows="4"
                 type="text"
                 placeholder="Description"
                 name="description"
@@ -273,11 +296,83 @@ export default class GameCreate extends Component {
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="formHorizontalGenre">
+          <Form.Group as={ Row } controlId="formHorizontalReleaseDate">
+            <Form.Label column sm={ 2 }>
+              Release Date
+            </Form.Label>
+            <Col sm={ 10 }>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Release Date"
+                name="release_date"
+                value={ this.state.release_date }
+                onChange={ this.handleInputChange }
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} controlId="formHorizontalMetacriticRating">
             <Form.Label column sm={2}>
-              Genre
+              Metacritic Rating
+            </Form.Label>
+            <Col sm={ 10 }>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Metacritic Rating"
+                name="metacritic_rating"
+                value={ this.state.metacritic_rating }
+                onChange={ this.handleInputChange }
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={ Row } controlId="formHorizontalDeveloper">
+            <Form.Label column sm={ 2 }>
+              Developer
             </Form.Label>
             <Col sm={4}>
+              <InputGroup>
+                <Form.Control
+                  required
+                  as="select"
+                  multiple
+                  placeholder="Developer"
+                  name="developer_id"
+                  onChange={ this.addDeveloper }
+                >
+                  { this.developerList() }
+                </Form.Control>
+              </InputGroup>
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={ Row } controlId="formHorizontalPublisher">
+            <Form.Label column sm={ 2 }>
+              Publisher
+            </Form.Label>
+            <Col sm={ 4 }>
+              <InputGroup>
+                <Form.Control
+                  required
+                  as="select"
+                  multiple
+                  placeholder="Publsiher"
+                  name="publisher_id"
+                  onChange={ this.addPublisher }
+                >
+                  { this.publisherList() }
+                </Form.Control>
+              </InputGroup>
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={ Row } controlId="formHorizontalGenre">
+            <Form.Label column sm={ 2 }>
+              Genre
+            </Form.Label>
+            <Col sm={ 4 }>
               <InputGroup>
                 <Form.Control
                   required
@@ -285,56 +380,58 @@ export default class GameCreate extends Component {
                   multiple
                   placeholder="Genre"
                   name="genre_id"
-                  onChange={this.addGenre}
+                  onChange={ this.addGenre }
                 >
-                  {this.genreList()}
+                  { this.genreList() }
                 </Form.Control>
               </InputGroup>
             </Col>
           </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalAuthor">
-            <Form.Label column sm={2}>
-              Author
+
+          <Form.Group as={ Row } controlId="formHorizontalPlatform">
+            <Form.Label column sm={ 2 }>
+              Platform
             </Form.Label>
-            <Col sm={4}>
+            <Col sm={ 4 }>
               <InputGroup>
                 <Form.Control
                   required
                   as="select"
                   multiple
-                  placeholder="Author"
-                  name="author_id"
-                  onChange={this.addAuthor}
+                  placeholder="Platform"
+                  name="platform_id"
+                  onChange={ this.addPlatform }
                 >
-                  {this.authorList()}
+                  { this.platformList() }
                 </Form.Control>
               </InputGroup>
             </Col>
           </Form.Group>
 
-          {/* <Form.Group
-            as={Row}
-            controlId="formHorizontalAuthor"
-            className="custome-file"
-          >
-            <Form.Label column sm={2}>
-              Cover Upload
+          <Form.Group as={ Row } controlId="formHorizontalGameMode">
+            <Form.Label column sm={ 2 }>
+              Game Mode(s)
             </Form.Label>
-            <Col sm={8}>
-               <InputGroup> 
-              <Form.Control
-                type="file"
-                placeholder="cover"
-                name="file"
-                onChange={this.cover}
-              ></Form.Control>
+            <Col sm={ 4 }>
+              <InputGroup>
+                <Form.Control
+                  required
+                  as="select"
+                  multiple
+                  placeholder="Game Mode(s)"
+                  name="game_mode_id"
+                  onChange={ this.addame_mode }
+                >
+                  { this.game_modeList() }
+                </Form.Control>
+              </InputGroup>
             </Col>
-          </Form.Group> */}
+          </Form.Group>
 
           <br />
-          <Form.Group as={Row}>
-            <Col sm={{ span: 10, offset: 2 }}>
-              <Button type="submit">Add Book</Button>
+          <Form.Group as={ Row }>
+            <Col sm={ { span: 10, offset: 2 } }>
+              <Button type="submit">Add Game</Button>
             </Col>
           </Form.Group>
         </Form>
